@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Pitch implements Serializable{
    
    //fields
-   protected byte type;   //1 = fastball: 2 = Curveball: 3 = Slider: 4 = Changeup: 5 = Knuckleball: 6 = else
+   protected byte type;   //1 = fastball: 2 = Curveball: 3 = Slider: 4 = Changeup: 5 = Knuckleball: 6 = Slider
    protected boolean strike;   //true if pitch is a strike, else a ball
    protected byte velo;   //(-128 - 127) ex. 93 for 93mph 
    
