@@ -44,7 +44,8 @@ public class Outing implements Serializable{
    protected transient double pt6;     //PT% splitter
    
 
-   public Outing(Pitcher p, String team, boolean home, LocalDate d){
+   public Outing(Pitcher p, LList<Pitch> Pitches, String team, boolean home, LocalDate d){
+	  this.pitches = Pitches;
       this.pitcher = p;
       this.opposing_team = team;
       this.home = home;
@@ -85,7 +86,9 @@ public class Outing implements Serializable{
    public int getPitchCount(){   return this.pitches.size();   }
    
    //SETTERS---------------------------------------------------------------
-   public void setPitcher(Pitcher p){  this.pitcher = p; }
+   public void setPitcher(Pitcher p){this.pitcher = p;}
+   
+   public void addPitch(Pitch p) {this.pitches.add(p);}
    
    public void CalcPitches(LList<Pitch> p){
  
