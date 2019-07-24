@@ -80,6 +80,7 @@ public class PitchTrackerDriver{
 					Out.addPitch(p);
 					games.addOuting(Out);
 				}
+				System.out.println("Total pitches: " + pitchesList.size);
 				Out.CalcPitches(pitchesList);
 				
 				
