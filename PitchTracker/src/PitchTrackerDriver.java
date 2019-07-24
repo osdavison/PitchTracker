@@ -326,7 +326,7 @@ public class PitchTrackerDriver{
 	{
 		Scanner scanner;
 		try {
-			scanner = new Scanner(new File("OldPitchFormDataSample.csv"));			
+			scanner = new Scanner(new File("PitchForm8DataSample.csv"));			
 			while (scanner.hasNextLine())
 			{
 				String[] d = scanner.nextLine().split(",");
