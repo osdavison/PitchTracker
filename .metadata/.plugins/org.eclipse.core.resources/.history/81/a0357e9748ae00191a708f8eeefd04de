@@ -334,53 +334,55 @@ public class PitchTrackerDriver{
 				System.out.println(P.getNameAndNum());
 				Outing Out = new Outing(P, null, false, null);
 				LList<Pitch> pitchesList = new LList<Pitch>();
-				for(int i = 3; i < d.length; i = i + 3)
+				System.out.println(d[0] + "," + d[1] + "," + d[2]);
+				for(int i = 2; i < d.length; i = i + 3)
 				{
-					if(d[i].equals(""))
+					System.out.println(d[i] + "," + d[i+1] + "," + d[i+2]);
+					if(d[i] != "")
 					{
-						//hacky way to skip blanks
-						i = i - 2;
-						continue;
-					}
-						
-					System.out.println(i);	
-					Pitch p = new Pitch();
-					//result,type,speed
-					if(d[i].equals("Ball"))
-					{
-						p.setStrike(0);
+						System.out.println(i);	
+						Pitch p = new Pitch();
+						//result,type,speed
+						if(d[i].equals("Ball"))
+						{
+							p.setStrike(0);
+						}
+						else
+						{
+							p.setStrike(1);
+						}
+
+						switch(d[i + 1])
+						{
+						case "Fastball": 
+							p.setType(1);
+							break;
+						case "Curveball": 
+							p.setType(2);
+							break;
+						case "Slider": 
+							p.setType(3);
+							break;
+						case "Change Up":
+							p.setType(4);
+							break;
+						case "Knuckle Ball": 
+							p.setType(5);
+							break;
+						case "Splitter": 
+							p.setType(6);
+							break;
+						}
+						System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike() + "\n");
+						p.setVelo(Integer.parseInt(d[i + 2]));
+						pitchesList.add(p);
 					}
 					else
 					{
-						p.setStrike(1);
-					}
-					
-					switch(d[i + 1])
-					{
-					case "Fastball": 
-						p.setType(1);
-						break;
-					case "Curveball": 
-						p.setType(2);
-						break;
-					case "Slider": 
-						p.setType(3);
-						break;
-					case "Change Up":
-						p.setType(4);
-						break;
-					case "Knuckle Ball": 
-						p.setType(5);
-						break;
-					case "Splitter": 
-						p.setType(6);
-						break;
+						i = i - 2;
 					}
 
-					p.setVelo(Integer.parseInt(d[i + 2]));
-					System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike());
-					System.out.println(d[i + 2] + "\n");
-					pitchesList.add(p);
+
 				}
 				Out.CalcPitches(pitchesList);
 			}
@@ -389,10 +391,10 @@ public class PitchTrackerDriver{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
+
 	private static void loadData(LList<Game> games, SortedList<Pitcher> pitchers) throws IOException{
 		Scanner scan;
 		String pitchersFile = "Pitchers.txt";   //name of pitchers file

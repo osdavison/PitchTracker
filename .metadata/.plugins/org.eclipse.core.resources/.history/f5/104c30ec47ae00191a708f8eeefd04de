@@ -336,14 +336,14 @@ public class PitchTrackerDriver{
 				LList<Pitch> pitchesList = new LList<Pitch>();
 				for(int i = 3; i < d.length; i = i + 3)
 				{
-					if(d[i].equals(""))
+					if(d[i] == "")
 					{
 						//hacky way to skip blanks
 						i = i - 2;
 						continue;
 					}
 						
-					System.out.println(i);	
+						
 					Pitch p = new Pitch();
 					//result,type,speed
 					if(d[i].equals("Ball"))
@@ -376,10 +376,8 @@ public class PitchTrackerDriver{
 						p.setType(6);
 						break;
 					}
-
+					System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike() + "\n");
 					p.setVelo(Integer.parseInt(d[i + 2]));
-					System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike());
-					System.out.println(d[i + 2] + "\n");
 					pitchesList.add(p);
 				}
 				Out.CalcPitches(pitchesList);

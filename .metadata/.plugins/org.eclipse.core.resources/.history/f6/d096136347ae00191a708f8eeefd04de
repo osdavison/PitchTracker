@@ -11,7 +11,6 @@ public class PitchTrackerDriver{
 
 	public static void main(String[] args){
 
-		readCSV();
 		int option = -1;  //value holder for option
 		SortedList<Pitcher> pitchers = new SortedList<>();  //Linked list of Pitcher objects
 		LList<Game> games = new LList<>();  //Linked list of Game objects
@@ -54,7 +53,7 @@ public class PitchTrackerDriver{
 				temp_string2 = scan.next();
 				System.out.print("Enter jersey #: ");
 				temp_int1 = scan.nextInt();
-				if(addPitcher(temp_string1 + " " + temp_string2, temp_int1, pitchers))
+				if(addPitcher(temp_string1, temp_string2, temp_int1, pitchers))
 					System.out.println("Added");
 				else
 					System.out.println("Error Jersey # already taken");
@@ -211,10 +210,10 @@ public class PitchTrackerDriver{
 
 	//-----------------------------------------------------------------------------
 
-	private static boolean addPitcher(String Name, int num, SortedList<Pitcher> pitchers){
+	private static boolean addPitcher(int id, String Name, int num, SortedList<Pitcher> pitchers){
 		//travers through SortedList of Pitchers to see if @param num matches
 		//any pre-existing numbers
-		Pitcher newPitcher = new Pitcher(Name, num);
+		Pitcher newPitcher = new Pitcher(id, Name, num);
 		for(Pitcher p: pitchers){
 			if(newPitcher.equals(p))
 				return false;
@@ -330,20 +329,20 @@ public class PitchTrackerDriver{
 			while (scanner.hasNextLine())
 			{
 				String[] d = scanner.nextLine().split(",");
-				Pitcher P = new Pitcher(d[1], Integer.parseInt(d[0]));
-				System.out.println(P.getNameAndNum());
+				Pitcher P = new Pitcher(Integer.parseInt(d[0]), d[1]);
+				System.out.println(P.getNameAndNum() + " " + P.getID());
 				Outing Out = new Outing(P, null, false, null);
 				LList<Pitch> pitchesList = new LList<Pitch>();
 				for(int i = 3; i < d.length; i = i + 3)
 				{
-					if(d[i].equals(""))
+					if(d[i] == "")
 					{
 						//hacky way to skip blanks
 						i = i - 2;
 						continue;
 					}
 						
-					System.out.println(i);	
+						
 					Pitch p = new Pitch();
 					//result,type,speed
 					if(d[i].equals("Ball"))
@@ -376,10 +375,8 @@ public class PitchTrackerDriver{
 						p.setType(6);
 						break;
 					}
-
+					System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike() + "\n");
 					p.setVelo(Integer.parseInt(d[i + 2]));
-					System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike());
-					System.out.println(d[i + 2] + "\n");
 					pitchesList.add(p);
 				}
 				Out.CalcPitches(pitchesList);
@@ -425,7 +422,7 @@ public class PitchTrackerDriver{
 				f_name = scan.next();
 				l_name = scan.next();
 				number = scan.nextInt();
-				addPitcher(f_name + " " + l_name, number, pitchers);
+				addPitcher(f_name, l_name, number, pitchers);
 			}
 		} catch (Exception e) {
 			System.err.println(pitchersFile + " was not found");

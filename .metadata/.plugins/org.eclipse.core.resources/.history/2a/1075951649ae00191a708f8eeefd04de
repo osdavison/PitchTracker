@@ -376,10 +376,9 @@ public class PitchTrackerDriver{
 						p.setType(6);
 						break;
 					}
-
+					System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike() + "\n");
+					System.out.println(d[i + 2]);
 					p.setVelo(Integer.parseInt(d[i + 2]));
-					System.out.println(p.getType() + " " + p.getVelo() +" " + " " + p.isStrike());
-					System.out.println(d[i + 2] + "\n");
 					pitchesList.add(p);
 				}
 				Out.CalcPitches(pitchesList);

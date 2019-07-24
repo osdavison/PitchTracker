@@ -27,7 +27,7 @@ public class Pitcher implements Serializable, Comparable<Pitcher>{
       this.outings = new LList<>();
    }//ends constructor
    
-   public Pitcher(String name, int n){
+   public Pitcher(int id, String name, int n){
 	      String[] NAME = name.split(" ");
 		  this.first_name = NAME[0];
 	      this.last_name = NAME[1];
