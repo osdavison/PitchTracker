@@ -49,7 +49,7 @@ public class Game implements Serializable{
       Outing newOuting = new Outing(p, this.opposing_team, this.home, this.date);
       this.outings.add(newOuting);
       //throw pitches for outing
-      newOuting.throwPitches(scan);
+      //newOuting.throwPitches(scan);
       //copy over outing to that pitchers outings
       p.addOuting(newOuting);         
    }//ends addOuting
