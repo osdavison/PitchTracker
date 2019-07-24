@@ -18,7 +18,7 @@ public class Pitcher implements Serializable, Comparable<Pitcher>{
    protected transient double avgV3;  //avg slider velo
    protected transient double avgV4;  //avg change-up velo
    protected transient double avgV5;  //avg knuckleball velo
-   protected transient double avgV6;  //avg other velo
+   protected transient double avgV6;  //avg splitter velo
    
    //param n is a unique number
    public Pitcher(int id, String f, String l, int n){
