@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class Pitcher implements Serializable, Comparable<Pitcher>{
    
    //fields
+   protected int ID;
    protected String first_name;
    protected String last_name;
    protected int number;
@@ -17,15 +18,26 @@ public class Pitcher implements Serializable, Comparable<Pitcher>{
    protected transient double avgV3;  //avg slider velo
    protected transient double avgV4;  //avg change-up velo
    protected transient double avgV5;  //avg knuckleball velo
-   protected transient double avgV6;  //avg slider velo
+   protected transient double avgV6;  //avg other velo
    
    //param n is a unique number
-   public Pitcher(String f, String l, int n){
-      this.first_name = f;
+   public Pitcher(int id, String f, String l, int n){
+      this.ID = id;
+	  this.first_name = f;
       this.last_name = l;
       this.number = n;
       this.outings = new LList<>();
    }//ends constructor
+   
+   public Pitcher(int id, String name, int n){
+	      this.ID = id;
+	      String[] NAME = name.split(" ");
+		  this.first_name = NAME[0];
+	      this.last_name = NAME[1];
+	      this.number = n;
+	      this.outings = new LList<>();
+	   }//ends constructor
+   
    
    //*********************************************************************************
    
@@ -35,6 +47,8 @@ public class Pitcher implements Serializable, Comparable<Pitcher>{
    public String getLastName(){  return this.last_name;  }
    
    public int getNumber(){ return this.number;  }
+   
+   public int getID(){ return this.ID;  }
    
    //GGGGGGGGGGGGGGGGGGGGGGGGGGGGG
    
@@ -53,6 +67,10 @@ public class Pitcher implements Serializable, Comparable<Pitcher>{
       this.number = num;
       return true;
    }//ends set number
+   
+   public void setID(int id){  this.ID = id;  }
+   
+   
    //SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
    
    //*********************************************************************************

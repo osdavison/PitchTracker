@@ -23,25 +23,25 @@ public class Outing implements Serializable{
    protected transient double avgV3;   //avg slider velo
    protected transient double avgV4;   //avg change-up velo
    protected transient double avgV5;   //avg knuckleball velo
-   protected transient double avgV6;   //avg slider velo
+   protected transient double avgV6;   //avg other velo
    protected transient int t1;     //Top fastball
    protected transient int t2;     //Top curveball
    protected transient int t3;     //Top slider
    protected transient int t4;     //Top change-up
    protected transient int t5;     //Top knuckleball
-   protected transient int t6;     //Top slider
+   protected transient int t6;     //Top other
    protected transient double sp1;     //strike % fastball
    protected transient double sp2;     //strike % curveball
    protected transient double sp3;     //strike % slider
    protected transient double sp4;     //strike % change-up
    protected transient double sp5;     //strike % knuckleball
-   protected transient double sp6;     //strike % slider
+   protected transient double sp6;     //strike % other
    protected transient double pt1;     //PT% fastball
    protected transient double pt2;     //PT% curveball
    protected transient double pt3;     //PT% slider
    protected transient double pt4;     //PT% change-up
    protected transient double pt5;     //PT% knuckleball
-   protected transient double pt6;     //PT% slider
+   protected transient double pt6;     //PT% other
    
 
    public Outing(Pitcher p, String team, boolean home, LocalDate d){
@@ -68,7 +68,7 @@ public class Outing implements Serializable{
       this.t3 = 0;
       this.t4 = 0;
       this.t5 = 0;
-      this.t6 = 0;  
+      this.t5 = 0;  
       this.date = d;
       
    }//ends constructor
@@ -87,34 +87,21 @@ public class Outing implements Serializable{
    //SETTERS---------------------------------------------------------------
    public void setPitcher(Pitcher p){  this.pitcher = p; }
    
-   public void throwPitches(Scanner scan){
-      int option = -1;
-      int type = 0;
-      int strike = 0;
-      int velo = 0;
-      int pitch_num = 1;
-      System.out.println("Enter -1 for pitch type to end outing");
-      while(option != 0){
-         System.out.print(pitch_num + ") Enter pitch type: ");
-         type = scan.nextInt();
-         if(type < 0){
-            option = 0;
-            break;
-         }
-         System.out.print("Enter 1 if strike (0 if ball): ");
-         strike = scan.nextInt();
-         System.out.print("Enter velocity: ");
-         velo = scan.nextInt();
-         this.pitches.add(new Pitch(type, strike, velo));
-         pitch_num++;
+   public void CalcPitches(LList<Pitch> p){
+ 
+       for(int i = 0; i < p.size; i++)
+    	   this.pitches.add(p.get(i));
          
-      }
+      
       //all pitches have been throw now adjust values*******
       
       //adjusts all data
       calcAll();
       
    }//ends throwPitches
+   
+   
+   
    
    //------------------------------------------------------------------------------
    
@@ -244,7 +231,7 @@ public class Outing implements Serializable{
          System.out.println("Knuckleball: Avg: " + Math.round(this.avgV5 * 100.0)/100.0 + "\t\tK%: " + Math.round(this.sp5 * 100.0)/100.0 + "\t\tPT: " + Math.round(this.pt5 * 100.0)/100.0 + "\t\tT: " + this.t5);
       //print avg velo 6
       if(avgV6 > 0)
-         System.out.println("Slider:       Avg: " + Math.round(this.avgV6 * 100.0)/100.0 + "\t\tK%: " + Math.round(this.sp6 * 100.0)/100.0 + "\t\tPT: " + Math.round(this.pt6 * 100.0)/100.0 + "\t\tT: " + this.t6);
+         System.out.println("Other:       Avg: " + Math.round(this.avgV6 * 100.0)/100.0 + "\t\tK%: " + Math.round(this.sp6 * 100.0)/100.0 + "\t\tPT: " + Math.round(this.pt6 * 100.0)/100.0 + "\t\tT: " + this.t6);
          
    }//ends printOuting
    
