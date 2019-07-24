@@ -11,24 +11,23 @@ public class PitchTrackerDriver{
 
 	public static void main(String[] args){
 
-		readCSV();
 		int option = -1;  //value holder for option
 		SortedList<Pitcher> pitchers = new SortedList<>();  //Linked list of Pitcher objects
-		LList<Game> games = new LList<>();  //Linked list of Game objects
+		LList<Outing> Outings = new LList<>();
+		Game games = new Game(Outings);  //Linked list of Game objects
+		
+		readCSV(pitchers, games);
+		
+		
 		Scanner scan = new Scanner(System.in);
 		String temp_string1 = ""; //temp string for holding values
 		String temp_string2 = "";
 		int temp_int1;
 
 		//load data upon starting program
-		try{
-			loadData(games, pitchers);
-		} catch (IOException ex) {
-			System.err.println("IO Error Loading");
-		}
 
 		//debug
-		System.out.println("Number of Games: " + games.size());
+		//System.out.println("Number of Games: " + games.size());
 		System.out.println("Number of Pitchers: " + pitchers.size());        
 		while(option != 0){
 			option = getOption(scan);
@@ -40,10 +39,10 @@ public class PitchTrackerDriver{
 				System.out.print("Enter 1 if game is at home (0 if away): ");
 				temp_int1 = scan.nextInt();
 				if(temp_int1 == 1){
-					if(!startGame(temp_string1, true, pitchers, games, scan))
+	//				if(!startGame(temp_string1, true, pitchers, games, scan))
 						System.out.println("Error adding game");
 				}else{
-					if(!startGame(temp_string1, false, pitchers, games, scan))
+	//				if(!startGame(temp_string1, false, pitchers, games, scan))
 						System.out.println("Error adding game");
 				}
 				break;
@@ -60,60 +59,60 @@ public class PitchTrackerDriver{
 					System.out.println("Error Jersey # already taken");
 				break;
 			case 3:  //Look at a game
-				if(games.size() == 0){
-					System.out.println("\nNo Games\n");
+	//			if(games.size() == 0){
+	//				System.out.println("\nNo Games\n");
 					break;
 				}
-				printGames(games);
+	//			printGames(games);
 				System.out.print("Enter Game #: ");
 				temp_int1 = scan.nextInt();
-				Game g = games.get(temp_int1 - 1);
-				g.viewPitchers();
+	//			Game g = games.get(temp_int1 - 1);
+//				g.viewPitchers();
 				break;
-			case 4:  //Look at a pitcher
-				if(pitchers.size() == 0){
-					System.out.println("\nNo Pitchers\n");
-					break;
-				}
-				printPitchers(pitchers);
-				System.out.print("Enter Pitcher #: ");
-				temp_int1 = scan.nextInt();
-				Pitcher p = pitchers.get(temp_int1 - 1);
+	//		case 4:  //Look at a pitcher
+//				if(pitchers.size() == 0){
+//					System.out.println("\nNo Pitchers\n");
+//					break;
+//				}
+//				printPitchers(pitchers);
+//				System.out.print("Enter Pitcher #: ");
+//				temp_int1 = scan.nextInt();
+//				Pitcher p = pitchers.get(temp_int1 - 1);
 				//look at that pitchers outings
-				p.viewOutings();
-				break;
-			case 5:  //Edit a Game
+//				p.viewOutings();
+//				break;
+		//	case 5:  //Edit a Game
 
-				break;
-			case 6:  //Edit a Pitcher
-				printPitchers(pitchers);
-				System.out.print("Enter Pitcher #: ");
-				temp_int1 = scan.nextInt();
-				Pitcher p2 = pitchers.get(temp_int1 - 1);
+//				break;
+		//	case 6:  //Edit a Pitcher
+		//		printPitchers(pitchers);
+///				System.out.print("Enter Pitcher #: ");
+//				temp_int1 = scan.nextInt();
+//				Pitcher p2 = pitchers.get(temp_int1 - 1);
 				//ask what to edit
-				printPitcherEditOptions();
-				break;
-			case 7:  //Delete a Game
+//				printPitcherEditOptions();
+//				break;
+//		//	case 7:  //Delete a Game
+//
+//				break;
+//		//	case 8:  //Delete a Pitcher
+//
+//				break;
+//		//	case 9:  //Save data
+//				try{
+//			//		saveData(games, pitchers);
+//				} catch (IOException ex) {
+//					System.err.println("IO Error Writing");
+//				} 
+//				break;
 
-				break;
-			case 8:  //Delete a Pitcher
-
-				break;
-			case 9:  //Save data
-				try{
-					saveData(games, pitchers);
-				} catch (IOException ex) {
-					System.err.println("IO Error Writing");
-				} 
-				break;
-
-			default: //Wrong input
-				System.out.println("Error invalid input");
-				break;
-			}//ends switch for choices
+		//	default: //Wrong input
+//				System.out.println("Error invalid input");
+	//			break;
+	//		}//ends switch for choices
 
 		}//ends choices loop
-		System.out.println("GoodBye");
+//		System.out.println("GoodBye");
 	}//ends main
 
 	//-----------------------------------------------------------------------------
@@ -152,11 +151,11 @@ public class PitchTrackerDriver{
 		System.out.println("\n-------------------------------");
 		for(Game g: games){
 			System.out.print(i + ") ");
-			if(g.getHome())
+	//		if(g.getHome())
 				System.out.print("Home ");
-			else
+//			else
 				System.out.print("Away ");
-			System.out.println("against " + g.getTeam() + " " + g.getDate());
+//			System.out.println("against " + g.getTeam() + " " + g.getDate());
 			i++;
 		}
 		System.out.println("-------------------------------\n");
@@ -169,8 +168,8 @@ public class PitchTrackerDriver{
 			System.out.println("No pitchers available");
 			return false;
 		}   
-		Game newGame = new Game(team, home);
-		games.add(newGame);
+		//Game newGame = new Game(team, home);
+//		games.add(newGame);
 		printPitchers(pitchers);
 		int choice = 0;
 		System.out.print("Enter starting pitcher (coresponding #): ");
@@ -182,7 +181,7 @@ public class PitchTrackerDriver{
 			choice = scan.nextInt();
 		}//ends error loop
 		//Adds starting pitcher's outing
-		newGame.addOuting(pitchers.get(choice - 1), scan);
+		//newGame.addOuting(pitchers.get(choice - 1), scan);
 		//TODO
 		int option = -1;
 		while(option != 0){
@@ -201,7 +200,7 @@ public class PitchTrackerDriver{
 					System.out.print("Enter pitcher (coresponding #): ");
 					choice = scan.nextInt();
 				}//ends error loop
-				newGame.addOuting(pitchers.get(choice - 1), scan);
+				//newGame.addOuting(pitchers.get(choice - 1), scan);
 			}//ends else
 		}//while game still going
 
@@ -292,11 +291,11 @@ public class PitchTrackerDriver{
 		gpw.println(games.size());
 		for(Game g: games){
 			//print  team
-			gpw.print(g.getTeam() + " ");
+	//		gpw.print(g.getTeam() + " ");
 			//print home
-			gpw.print(g.getHome() + " ");
+	//		gpw.print(g.getHome() + " ");
 			//print date
-			gpw.println(g.getDate());
+	//		gpw.println(g.getDate());
 			//print num outings
 			gpw.println(g.getNumOutings());
 			//for each outing
@@ -322,7 +321,7 @@ public class PitchTrackerDriver{
 	//-----------------------------------------------------------------------------
 
 
-	private static void readCSV(/*LList<Game> games, SortedList<Pitcher> pitchers*/)
+	private static void readCSV(SortedList<Pitcher> pitchers, Game games)
 	{
 		Scanner scanner;
 		try {
@@ -331,6 +330,8 @@ public class PitchTrackerDriver{
 			{
 				String[] d = scanner.nextLine().split(",");
 				Pitcher P = new Pitcher(d[1], Integer.parseInt(d[0]));
+				pitchers.add(P);
+				System.out.println(P.getNameAndNum());
 				Outing Out = new Outing(P, null, false, null);
 				LList<Pitch> pitchesList = new LList<Pitch>();
 				for(int i = 3; i < d.length; i = i + 3)
@@ -376,9 +377,14 @@ public class PitchTrackerDriver{
 					}
 
 					p.setVelo(Integer.parseInt(d[i + 2]));
+					System.out.println(p.getType() + " " + p.getVelo() + " " + p.isStrike());
 					pitchesList.add(p);
+					games.addOuting(Out);
 				}
 				Out.CalcPitches(pitchesList);
+				
+				
+
 			}
 
 			scanner.close();
@@ -441,7 +447,7 @@ public class PitchTrackerDriver{
 				home = Boolean.parseBoolean(scan.next());
 				date = LocalDate.parse(scan.next());
 				//add game
-				games.add(new Game(team, home, date));
+		//		games.add(new Game(team, home, date));
 				//read number of outings
 				num_outings = scan.nextInt();
 				//for every outing... do this
