@@ -31,8 +31,8 @@ public class PitchTrackerDriver{
 				Pitcher P = new Pitcher(d[1], Integer.parseInt(d[0]));
 				pitchers.add(P);
 				System.out.println(P.getNameAndNum());
-				Outing Out = new Outing(P, null, false, null);
 				LList<Pitch> pitchesList = new LList<Pitch>();
+				Outing Out = new Outing(P, pitchesList, null, false, null);
 				for(int i = 3; i < d.length; i = i + 3)
 				{
 					if(d[i].equals(""))
@@ -77,7 +77,7 @@ public class PitchTrackerDriver{
 
 					p.setVelo(Integer.parseInt(d[i + 2]));
 					System.out.println(p.getType() + " " + p.getVelo() + " " + p.isStrike());
-					pitchesList.add(p);
+					Out.addPitch(p);
 					games.addOuting(Out);
 				}
 				Out.CalcPitches(pitchesList);

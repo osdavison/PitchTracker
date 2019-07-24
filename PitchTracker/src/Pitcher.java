@@ -128,7 +128,7 @@ public class Pitcher implements Serializable, Comparable<Pitcher>{
       } 
   
       // Edge case for strings like 
-      // String 1="Geeks" and String 2="Geeksforgeeks" 
+
       if (lengthParam != lengthThis) { 
          return lengthParam - lengthThis; 
       } 
