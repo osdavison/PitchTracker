@@ -11,6 +11,7 @@ public class PitchTrackerDriver{
 
 	public static void main(String[] args){
 
+
 		int option = -1;  //value holder for option
 		SortedList<Pitcher> pitchers = new SortedList<>();  //Linked list of Pitcher objects
 		LList<Game> games = new LList<>();  //Linked list of Game objects
@@ -210,10 +211,10 @@ public class PitchTrackerDriver{
 
 	//-----------------------------------------------------------------------------
 
-	private static boolean addPitcher(String fName, String lName, int num, SortedList<Pitcher> pitchers){
+	private static boolean addPitcher(int id, String Name, int num, SortedList<Pitcher> pitchers){
 		//travers through SortedList of Pitchers to see if @param num matches
 		//any pre-existing numbers
-		Pitcher newPitcher = new Pitcher(fName, lName, num);
+		Pitcher newPitcher = new Pitcher(id, Name, num);
 		for(Pitcher p: pitchers){
 			if(newPitcher.equals(p))
 				return false;
@@ -325,25 +326,62 @@ public class PitchTrackerDriver{
 	{
 		Scanner scanner;
 		try {
-			scanner = new Scanner(new File("OldPitchFormDataSample.csv"));
-			scanner.useDelimiter(",");
-			int num_pitchers = 0;
-			
-
-			while (scanner.hasNext())
+			scanner = new Scanner(new File("OldPitchFormDataSample.csv"));			
+			while (scanner.hasNextLine())
 			{
-				// Read the tokens and store them into a Linked List 
+				String[] d = scanner.nextLine().split(",");
+				Pitcher P = new Pitcher(Integer.parseInt(d[0]), d[1], Integer.parseInt(d[2]));
+				Outing Out = new Outing(P, null, false, null);
+				LList<Pitch> pitchesList = new LList<Pitch>();
+				for(int i = 7; i < d.length; i++)
+				{
+					Pitch p = new Pitch();
+					//result,type,speed
+					if(d[i].equals("Ball"))
+					{
+						p.setStrike(0);
+					}
+					else
+					{
+						p.setStrike(1);
+					}
+					
+					switch(d[i + 1])
+					{
+					case "Fastball": 
+						p.setType(1);
+						break;
+					case "Curveball": 
+						p.setType(2);
+						break;
+					case "Slider": 
+						p.setType(3);
+						break;
+					case "Change Up":
+						p.setType(4);
+						break;
+					case "Knuckle Ball": 
+						p.setType(5);
+						break;
+					default: 
+						p.setType(6);
+						break;
+					}
+					
+					p.setVelo(Integer.parseInt(d[i + 2]));
+					pitchesList.add(p);
+				}
+				Out.CalcPitches(pitchesList);
 			}
-
 
 			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
-
+	
 	private static void loadData(LList<Game> games, SortedList<Pitcher> pitchers) throws IOException{
 		Scanner scan;
 		String pitchersFile = "Pitchers.txt";   //name of pitchers file
