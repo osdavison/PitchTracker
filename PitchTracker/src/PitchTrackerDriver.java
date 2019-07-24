@@ -55,10 +55,10 @@ public class PitchTrackerDriver{
 					
 					switch(d[i + 1])
 					{
-					case "Fastball": 
+					case "Fast Ball": 
 						p.setType(1);
 						break;
-					case "Curveball": 
+					case "Curve Ball": 
 						p.setType(2);
 						break;
 					case "Slider": 
@@ -70,7 +70,7 @@ public class PitchTrackerDriver{
 					case "Knuckle Ball": 
 						p.setType(5);
 						break;
-					case "Splitter": 
+					case "Split": 
 						p.setType(6);
 						break;
 					}
