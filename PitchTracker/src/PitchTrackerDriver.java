@@ -183,9 +183,10 @@ public class PitchTrackerDriver{
 				game.addOuting(outing);
 				outing.calcAll();
 
-				//scanner.close();
-
 			}//ends while
+
+			scanner.close();
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("Error: " + e.getMessage());
 			return false;
