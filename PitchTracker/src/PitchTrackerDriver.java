@@ -73,7 +73,7 @@ public class PitchTrackerDriver{
         
         XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
         chart.pack( );          
-        RefineryUtilities.centerFrameOnScreen( chart );          
+        RefineryUtilities.centerFrameOnScreen( chart );
         chart.setVisible( true );
 	}//ends main
 
@@ -136,13 +136,13 @@ public class PitchTrackerDriver{
 					}
 
 					pitch.setVelo(Integer.parseInt(d[i + 2]));
-					System.out.println(pitch.getType() + " " + pitch.getVelo() + " " + (pitch.isStrike() ? "Strike" : "Ball"));
 					outing.addPitch(pitch);
 					
 				}//ends for
 				game.addOuting(outing);
-				System.out.println("Total pitches: " + pitchesList.size);
 				outing.calcAll();
+				outing.printPitches();
+				System.out.println("Total pitches: " + pitchesList.size);
 				
 
 			}//ends while

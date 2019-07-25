@@ -57,6 +57,25 @@ public class Pitch implements Serializable{
    
    public int getType() {  return (int)this.type;  }
    
+   public String getTypeName() {  
+	   switch((int)this.type) {
+		   case 1:
+			   return "Fastball";
+		   case 2:
+			   return "Curveball";
+		   case 3:
+			   return "Slider";
+		   case 4:
+			   return "Change Up";
+		   case 5:
+			   return "Knuckleball";
+		   case 6:
+			   return "Splitter";
+		   default:
+			   return "Unknown";
+	   }
+   }
+   
    public boolean isStrike(){ return this.strike;  }
    
    public int getVelo() {  return (int)this.velo;  }

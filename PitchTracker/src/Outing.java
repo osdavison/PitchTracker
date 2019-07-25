@@ -108,7 +108,7 @@ public class Outing implements Serializable{
    public void printPitches() {
 	   
 	   for(int i = 0; i < pitches.size(); i++) {
-		   System.out.println(pitches.get(i).getType() + " " + pitches.get(i).getVelo() + " " + pitches.get(i).isStrike());
+		   System.out.println(pitches.get(i).getTypeName() + " " + pitches.get(i).getVelo() + " " + (pitches.get(i).isStrike() ? "Strike" : "Ball"));
 	   }
    }//ends printPitches
    
