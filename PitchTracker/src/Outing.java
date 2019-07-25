@@ -95,12 +95,23 @@ public class Outing implements Serializable{
       return array;
    }
    
+   public LList<Pitch> getPitchList(){	return this.pitches;	}
+   
+   
    //SETTERS---------------------------------------------------------------
    public void setPitcher(Pitcher p){this.pitcher = p;}
    
    public void addPitch(Pitch p) {this.pitches.add(p);}
    
    //------------------------------------------------------------------------------
+   
+   public void printPitches() {
+	   
+	   for(int i = 0; i < pitches.size(); i++) {
+		   System.out.println(pitches.get(i).getType() + " " + pitches.get(i).getVelo() + " " + pitches.get(i).isStrike());
+	   }
+   }//ends printPitches
+   
    
    //calc avg velocity for given pitch type
    private double calcAvg(int type){
