@@ -37,6 +37,11 @@ public class PitchTrackerDriver{
 			case 3:
 				game.outings.get(0).printPitches();
 				break;
+			case 4:
+				break;
+			case 5:
+				System.out.println("Not in the Office");
+				break;
 			}
 		}
 		
@@ -45,13 +50,32 @@ public class PitchTrackerDriver{
 	//-----------------------------------------------------------------------------
 	
 	private static int getOption(Scanner scan, Game game) {
+		int input = 0;
+		String I;
 		System.out.println("Total pitches: " + game.outings.get(0).getPitchCount());
 		System.out.println("0)  Quit");
 		System.out.println("1)  Show pitch type graph");
 		System.out.println("2)  Show pitch velocity graph");
 		System.out.println("3)  Print pitches");
 		System.out.print("Enter Choice: ");
-		return scan.nextInt();
+		I = scan.nextLine();
+		try
+		{
+			input = Integer.parseInt(I);
+		}
+		catch(Exception E)
+		{
+			if(I.equals("Where is Dan?"))
+				input = 5;
+			else
+			{
+			input = 4;
+			System.out.println("Error: No Command " + E.getMessage());				
+			}
+
+		}
+		
+		return input;
 	}
 	
 	private static void showTypeChart(Game game) {
