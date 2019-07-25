@@ -34,6 +34,11 @@ public class PitchTrackerDriver{
         CC.pack();  //packs up everything into JFrame
         CC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         CC.setVisible(true);
+        
+        XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
+        chart.pack( );          
+        RefineryUtilities.centerFrameOnScreen( chart );          
+        chart.setVisible( true );
 	}//ends main
 
 	//-----------------------------------------------------------------------------
@@ -97,19 +102,20 @@ public class PitchTrackerDriver{
 					pitch.setVelo(Integer.parseInt(d[i + 2]));
 					System.out.println(pitch.getType() + " " + pitch.getVelo() + " " + pitch.isStrike());
 					outing.addPitch(pitch);
-					game.addOuting(outing);
-				}
+					
+				}//ends for
+				game.addOuting(outing);
 				System.out.println("Total pitches: " + pitchesList.size);
-				outing.CalcPitches(pitchesList);
+				outing.calcAll();
 				
 
-			}
+			}//ends while
 
 			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-	}
+	}//ends readcsv
 
 }//ends class
