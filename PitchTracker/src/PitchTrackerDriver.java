@@ -13,7 +13,6 @@ public class PitchTrackerDriver{
 		SortedList<Pitcher> pitchers = new SortedList<>();  //Linked list of Pitcher objects
 		LList<Outing> Outings = new LList<>();
 		Game game = new Game(Outings);  //Linked list of Game objects
-		
 		readCSV(pitchers, game);
 	}//ends main
 
