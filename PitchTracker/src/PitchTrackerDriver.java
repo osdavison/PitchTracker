@@ -12,15 +12,15 @@ public class PitchTrackerDriver{
 
 		SortedList<Pitcher> pitchers = new SortedList<>();  //Linked list of Pitcher objects
 		LList<Outing> Outings = new LList<>();
-		Game games = new Game(Outings);  //Linked list of Game objects
+		Game game = new Game(Outings);  //Linked list of Game objects
 		
-		readCSV(pitchers, games);
+		readCSV(pitchers, game);
 	}//ends main
 
 	//-----------------------------------------------------------------------------
 
 
-	private static void readCSV(SortedList<Pitcher> pitchers, Game games)
+	private static void readCSV(SortedList<Pitcher> pitchers, Game game)
 	{
 		Scanner scanner;
 		try {
@@ -28,11 +28,11 @@ public class PitchTrackerDriver{
 			while (scanner.hasNextLine())
 			{
 				String[] d = scanner.nextLine().split(",");
-				Pitcher P = new Pitcher(d[1], Integer.parseInt(d[0]));
-				pitchers.add(P);
-				System.out.println(P.getNameAndNum());
+				Pitcher pitcher = new Pitcher(d[1], Integer.parseInt(d[0]));
+				pitchers.add(pitcher);
+				System.out.println(pitcher.getNameAndNum());
 				LList<Pitch> pitchesList = new LList<Pitch>();
-				Outing Out = new Outing(P, pitchesList, null, false, null);
+				Outing outing = new Outing(pitcher, pitchesList, null, false, null);
 				for(int i = 3; i < d.length; i = i + 3)
 				{
 					if(d[i].equals(""))
@@ -42,47 +42,46 @@ public class PitchTrackerDriver{
 						continue;
 					}
 					
-					Pitch p = new Pitch();
+					Pitch pitch = new Pitch();
 					//result,type,speed
 					if(d[i].equals("Ball"))
 					{
-						p.setStrike(0);
+						pitch.setStrike(0);
 					}
 					else
 					{
-						p.setStrike(1);
+						pitch.setStrike(1);
 					}
 					
 					switch(d[i + 1])
 					{
 					case "Fast Ball": 
-						p.setType(1);
+						pitch.setType(1);
 						break;
 					case "Curve Ball": 
-						p.setType(2);
+						pitch.setType(2);
 						break;
 					case "Slider": 
-						p.setType(3);
+						pitch.setType(3);
 						break;
 					case "Change Up":
-						p.setType(4);
+						pitch.setType(4);
 						break;
 					case "Knuckle Ball": 
-						p.setType(5);
+						pitch.setType(5);
 						break;
 					case "Split": 
-						p.setType(6);
+						pitch.setType(6);
 						break;
 					}
 
-					p.setVelo(Integer.parseInt(d[i + 2]));
-					System.out.println(p.getType() + " " + p.getVelo() + " " + p.isStrike());
-					Out.addPitch(p);
-					games.addOuting(Out);
+					pitch.setVelo(Integer.parseInt(d[i + 2]));
+					System.out.println(pitch.getType() + " " + pitch.getVelo() + " " + pitch.isStrike());
+					outing.addPitch(pitch);
+					game.addOuting(outing);
 				}
 				System.out.println("Total pitches: " + pitchesList.size);
-				Out.CalcPitches(pitchesList);
-				
+				outing.CalcPitches(pitchesList);
 				
 
 			}
