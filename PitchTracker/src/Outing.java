@@ -89,7 +89,12 @@ public class Outing implements Serializable{
       double[] array = new double[6];
       
       for(int i = 0; i < this.pitches.size(); i++) {
-    	  array[this.pitches.get(i).getType()-1] += 1;
+    	  int pitchType = this.pitches.get(i).getType();
+    	  
+    	  if(pitchType != 0) {
+    		  array[pitchType - 1] += 1;
+    	  }
+    	  
       }
       
       return array;
