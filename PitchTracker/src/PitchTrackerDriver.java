@@ -1,12 +1,11 @@
 //Pitch Tracker Driver Class
-//@author Dylan Heid
+//@author Dylan Heid, Andrew Pressman, Seth Davison
 //Has a SortedList of Pitchers
 //Has a LList of Games
 //-----------------------------------
 import java.util.Scanner;
 import java.io.*;
 import org.jfree.ui.RefineryUtilities;
-import javax.swing.JFrame;
 
 public class PitchTrackerDriver{
 
