@@ -17,8 +17,8 @@ public class PitchTrackerDriver{
 		Game game = new Game(Outings);  //Linked list of Game objects
 		
 		readCSV(pitchers, game);
-		Outing a = Outings.get(0);
-		a.calcAll();
+		Outing outing = Outings.get(0);
+		outing.calcAll();
 
 		Scanner scan = new Scanner(System.in);
 		int option = -1;
