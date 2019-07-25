@@ -85,16 +85,15 @@ public class Outing implements Serializable{
    public int getPitchCount(){   return this.pitches.size();   }
    
    public double[] getPercentages(){
-	      calcAll();
-	      double[] array = new double[6];
-	      array[0] = 70;
-	      array[1] = 20;
-	      array[2] = 22;
-	      array[3] = 44;
-	      array[4] = 54;
-	      array[5] = 0;
-	      return array;
-	   }
+      calcAll();
+      double[] array = new double[6];
+      
+      for(int i = 0; i < this.pitches.size(); i++) {
+    	  array[this.pitches.get(i).getType()-1] += 1;
+      }
+      
+      return array;
+   }
    
    public LList<Pitch> getPitchList(){	return this.pitches;	}
    
@@ -103,22 +102,6 @@ public class Outing implements Serializable{
    public void setPitcher(Pitcher p){this.pitcher = p;}
    
    public void addPitch(Pitch p) {this.pitches.add(p);}
-   
-   public void CalcPitches(LList<Pitch> p){
- 
-       for(int i = 0; i < p.size; i++)
-    	   this.pitches.add(p.get(i));
-         
-      
-      //all pitches have been throw now adjust values*******
-      
-      //adjusts all data
-      calcAll();
-      
-   }//ends throwPitches
-   
-   
-   
    
    //------------------------------------------------------------------------------
    
