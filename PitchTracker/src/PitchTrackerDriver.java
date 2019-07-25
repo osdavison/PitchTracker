@@ -44,10 +44,12 @@ public class PitchTrackerDriver{
 			}
 		}
 
+		
 	}//ends main
 
 	//-----------------------------------------------------------------------------
 
+	
 	private static int getOption(Scanner scan, Game game) {
 		int input = 0;
 		String I;
@@ -65,15 +67,15 @@ public class PitchTrackerDriver{
 		catch(Exception E)
 		{
 			if(I.equals("Where is Dan?"))
-				input = 4;
+				input = 5;
 			else
 			{
-				input = 5;
-				System.out.println("Error: No Command " + E.getMessage());				
+			input = 4;
+			System.out.println("Error: No Command " + E.getMessage());				
 			}
 
 		}
-
+		
 		return input;
 	}
 
@@ -83,14 +85,25 @@ public class PitchTrackerDriver{
 		RefineryUtilities.centerFrameOnScreen(chart);
 		chart.setVisible(true);
 		chart.setAlwaysOnTop(true);
+        CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
+        chart.pack();  //packs up everything into JFrame
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
+        chart.setAlwaysOnTop(true);
 	}
 
+	
 	private static void showVelocityChart(Game game) {
 		XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
 		chart.pack();
 		RefineryUtilities.centerFrameOnScreen(chart);
 		chart.setVisible(true);
 		chart.setAlwaysOnTop(true);
+        XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
+        chart.setAlwaysOnTop(true);
 	}
 
 
@@ -116,6 +129,11 @@ public class PitchTrackerDriver{
 						continue;
 					}
 
+					
+					if(d[i].equals("BLANK")) {
+						continue;
+					}
+					
 					Pitch pitch = new Pitch();
 					//result,type,speed
 					if(d[i].equals("Ball"))
@@ -127,6 +145,7 @@ public class PitchTrackerDriver{
 						pitch.setStrike(1);
 					}
 
+					
 					switch(d[i + 1])
 					{
 					case "Fast Ball": 
@@ -152,10 +171,12 @@ public class PitchTrackerDriver{
 					pitch.setVelo(Integer.parseInt(d[i + 2]));
 					outing.addPitch(pitch);
 
+					
 				}//ends for
 				game.addOuting(outing);
 				outing.calcAll();
 
+				
 
 			}//ends while
 
@@ -164,6 +185,7 @@ public class PitchTrackerDriver{
 			e.printStackTrace();
 		}
 
+		
 	}//ends readcsv
 
 }//ends class
