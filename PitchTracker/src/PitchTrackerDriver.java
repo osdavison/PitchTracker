@@ -53,18 +53,26 @@ public class PitchTrackerDriver{
 //				+ a.t6 + "\n"
 //				);
 		
-        CreateChart CC = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
-        CC.pack();  //packs up everything into JFrame
-        CC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        CC.setVisible(true);
-        
-        XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
-        chart.pack( );          
-        RefineryUtilities.centerFrameOnScreen( chart );
-        chart.setVisible( true );
+		showTypeChart(game);
+		showVelocityChart(game);
+		
 	}//ends main
 
 	//-----------------------------------------------------------------------------
+	
+	private static void showTypeChart(Game game) {
+        CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
+        chart.pack();  //packs up everything into JFrame
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
+	}
+	
+	private static void showVelocityChart(Game game) {
+        XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
+	}
 
 
 	private static void readCSV(SortedList<Pitcher> pitchers, Game game)
