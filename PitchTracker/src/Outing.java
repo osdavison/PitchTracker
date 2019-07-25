@@ -100,22 +100,6 @@ public class Outing implements Serializable{
    
    public void addPitch(Pitch p) {this.pitches.add(p);}
    
-   public void CalcPitches(LList<Pitch> p){
- 
-     //  for(int i = 0; i < p.size; i++)
-    //	   this.pitches.add(p.get(i));
-         
-      
-      //all pitches have been throw now adjust values*******
-      
-      //adjusts all data
-      calcAll();
-      
-   }//ends throwPitches
-   
-   
-   
-   
    //------------------------------------------------------------------------------
    
    //calc avg velocity for given pitch type

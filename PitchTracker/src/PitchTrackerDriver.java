@@ -136,7 +136,7 @@ public class PitchTrackerDriver{
 				}
 				game.addOuting(outing);
 				System.out.println("Total pitches: " + pitchesList.size);
-				outing.CalcPitches(pitchesList);
+				outing.calcAll();
 				
 
 			}
