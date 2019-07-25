@@ -131,7 +131,7 @@ public class PitchTrackerDriver{
 					}
 
 					pitch.setVelo(Integer.parseInt(d[i + 2]));
-					System.out.println(pitch.getType() + " " + pitch.getVelo() + " " + pitch.isStrike());
+					System.out.println(pitch.getType() + " " + pitch.getVelo() + " " + (pitch.isStrike() ? "Strike" : "Ball"));
 					outing.addPitch(pitch);
 				}
 				game.addOuting(outing);
