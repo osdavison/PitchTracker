@@ -44,6 +44,7 @@ public class PitchTrackerDriver{
 				break;
 			}
 		}
+		System.exit(0);
 		
 	}//ends main
 
