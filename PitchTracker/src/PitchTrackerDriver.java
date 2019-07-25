@@ -19,52 +19,48 @@ public class PitchTrackerDriver{
 		readCSV(pitchers, game);
 		Outing a = Outings.get(0);
 		a.calcAll();
-//		System.out.println("Average velosity:\n"
-//				+ a.avgV1 + "\n"
-//				+ a.avgV2 + "\n"
-//				+ a.avgV3 + "\n"
-//				+ a.avgV4 + "\n"
-//				+ a.avgV5 + "\n"
-//				+ a.avgV6 + "\n"
-//				+ "Pitch Count:\n"
-//				+ a.pitch_count + "\n"
-//				+ "percent thrown for each pitch:\n"
-//				+ a.pt1 + "\n"
-//				+ a.pt2 + "\n"
-//				+ a.pt3 + "\n"
-//				+ a.pt4 + "\n"
-//				+ a.pt5 + "\n"
-//				+ a.pt6 + "\n"
-//				+ "strike %:\n"
-//				+ a.sp + "\n"
-//				+ a.sp2 + "\n"
-//				+ a.sp3 + "\n"
-//				+ a.sp4 + "\n"
-//				+ a.sp5 + "\n"
-//				+ a.sp6 + "\n"
-//				+ "num Strikes\n"
-//				+ a.strikes + "\n"
-//				+ 
-//				+ a.t1 + "\n"
-//				+ a.t2 + "\n"
-//				+ a.t3 + "\n"
-//				+ a.t4 + "\n"
-//				+ a.t5 + "\n"
-//				+ a.t6 + "\n"
-//				);
-		
-		showTypeChart(game);
-		showVelocityChart(game);
+
+		Scanner scan = new Scanner(System.in);
+		int option = -1;
+
+		System.out.println("Number of Pitchers: " + pitchers.size());        
+		while(option != 0){
+			option = getOption(scan, game);
+			switch(option){
+			case 0:
+				break;   //Quits
+			case 1:  
+				showTypeChart(game);
+				break;
+			case 2:
+				showVelocityChart(game);
+				break;
+			case 3:
+				game.outings.get(0).printPitches();
+				break;
+			}
+		}
 		
 	}//ends main
 
 	//-----------------------------------------------------------------------------
+	
+	private static int getOption(Scanner scan, Game game) {
+		System.out.println("Total pitches: " + game.outings.get(0).getPitchCount());
+		System.out.println("0)  Quit");
+		System.out.println("1)  Show pitch type graph");
+		System.out.println("2)  Show pitch velocity graph");
+		System.out.println("3)  Print pitches");
+		System.out.print("Enter Choice: ");
+		return scan.nextInt();
+	}
 	
 	private static void showTypeChart(Game game) {
         CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
         chart.pack();  //packs up everything into JFrame
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
+        chart.setAlwaysOnTop(true);
 	}
 	
 	private static void showVelocityChart(Game game) {
@@ -72,6 +68,7 @@ public class PitchTrackerDriver{
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
+        chart.setAlwaysOnTop(true);
 	}
 
 
@@ -136,8 +133,6 @@ public class PitchTrackerDriver{
 				}//ends for
 				game.addOuting(outing);
 				outing.calcAll();
-				outing.printPitches();
-				System.out.println("Total pitches: " + pitchesList.size);
 				
 
 			}//ends while

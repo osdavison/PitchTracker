@@ -9,15 +9,8 @@ import org.jfree.util.Rotation;
 
 public class CreateChart extends JFrame{
 	
-	double[] percentages = new double[6];
-	   
-	   public CreateChart(String appTitle, String chartTitle, double[] ar){
-	      for(int i = 0; i < 6; i++){
-	         //System.out.println("Copying " + ar[i] + "into spot " + i);
-	         percentages[i] = ar[i];
-	      }
-	      
-	      PieDataset dataset = createDataset();
+	   public CreateChart(String appTitle, String chartTitle, double[] percentages){
+	      PieDataset dataset = createDataset(percentages);
 	      JFreeChart chart = createChart(dataset, chartTitle);
 	      ChartPanel chartPanel = new ChartPanel(chart);
 	      chartPanel.setPreferredSize(new java.awt.Dimension(1000,600));
@@ -25,7 +18,7 @@ public class CreateChart extends JFrame{
 	      
 	   }//ends Constructor
 	   
-	   private PieDataset createDataset(){
+	   private PieDataset createDataset(double[] percentages){
 	      DefaultPieDataset result = new DefaultPieDataset();
 	      result.setValue("Fastball", percentages[0]);    //values do not need to add up to 100
 	      result.setValue("Curveball", percentages[1]);
