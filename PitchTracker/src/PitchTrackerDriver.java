@@ -39,6 +39,9 @@ public class PitchTrackerDriver{
 				break;
 			case 4:
 				break;
+			case 5:
+				System.out.println("Not in the Office");
+				break;
 			}
 		}
 		
@@ -62,11 +65,16 @@ public class PitchTrackerDriver{
 		}
 		catch(Exception E)
 		{
+			if(I.equals("Where is Dan?"))
+				input = 5;
+			else
+			{
 			input = 4;
-			System.out.println("Error: No Command " + E.getMessage());
+			System.out.println("Error: No Command " + E.getMessage());				
+			}
+
 		}
 		
-
 		return input;
 	}
 	
