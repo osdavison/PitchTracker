@@ -5,6 +5,21 @@
 //-----------------------------------
 import java.util.Scanner;
 import java.io.*;
+import java.time.LocalDate;
+import java.awt.Color; 
+import java.awt.BasicStroke; 
+import org.jfree.chart.ChartPanel; 
+import org.jfree.chart.JFreeChart; 
+import org.jfree.data.xy.XYDataset; 
+import org.jfree.data.xy.XYSeries; 
+import org.jfree.ui.ApplicationFrame; 
+import org.jfree.ui.RefineryUtilities; 
+import org.jfree.chart.plot.XYPlot; 
+import org.jfree.chart.ChartFactory; 
+import org.jfree.chart.plot.PlotOrientation; 
+import org.jfree.data.xy.XYSeriesCollection; 
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import javax.swing.JFrame;
 
 public class PitchTrackerDriver{
 
@@ -14,6 +29,11 @@ public class PitchTrackerDriver{
 		LList<Outing> Outings = new LList<>();
 		Game game = new Game(Outings);  //Linked list of Game objects
 		readCSV(pitchers, game);
+		
+        CreateChart CC = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
+        CC.pack();  //packs up everything into JFrame
+        CC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        CC.setVisible(true);
 	}//ends main
 
 	//-----------------------------------------------------------------------------
