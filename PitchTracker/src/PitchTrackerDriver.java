@@ -93,6 +93,10 @@ public class PitchTrackerDriver{
 						continue;
 					}
 					
+					if(d[i].equals("BLANK")) {
+						continue;
+					}
+					
 					Pitch pitch = new Pitch();
 					//result,type,speed
 					if(d[i].equals("Ball"))
