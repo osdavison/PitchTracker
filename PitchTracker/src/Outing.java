@@ -1,7 +1,6 @@
 //Outing class
 //@author Dylan Heid
 //---------------------------
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.io.Serializable;
 
@@ -161,7 +160,7 @@ public class Outing implements Serializable{
    private int calcT(int type){
    
       int top = -1;   //number of pitches
-      double percent;
+      //double percent;
       
       for(Pitch p: this.pitches){
          if(p.getType() == type){
@@ -181,7 +180,7 @@ public class Outing implements Serializable{
    private double calcPT(int type){
    
       int count = 0; //number of that pitch thrown
-      double percent;
+      //double percent;
       
       for(Pitch p: this.pitches){
          if(p.getType() == type){

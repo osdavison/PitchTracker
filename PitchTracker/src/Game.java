@@ -1,7 +1,6 @@
 //Game.java
 //@author Dylan Heid
 //------------------------------
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.io.Serializable;
 
