@@ -103,8 +103,8 @@ public class Outing implements Serializable{
    
    public void CalcPitches(LList<Pitch> p){
  
-       for(int i = 0; i < p.size; i++)
-    	   this.pitches.add(p.get(i));
+     //  for(int i = 0; i < p.size; i++)
+    //	   this.pitches.add(p.get(i));
          
       
       //all pitches have been throw now adjust values*******
