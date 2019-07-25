@@ -15,13 +15,16 @@ public class PitchTrackerDriver{
 		LList<Outing> Outings = new LList<>();
 		Game game = new Game(Outings);  //Linked list of Game objects
 
-		readCSV(pitchers, game);
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter Full .csv file path:");
+		String input = scan.nextLine();
+		readCSV(pitchers, game, input);
+		//C:\Users\spyan\Documents\Grav.Hack\PitchTracker\PitchTracker\PitchTracker\PitchForm8DataSample.csv
+		
 		Outing outing = Outings.get(0);
 		outing.calcAll();
-
-		Scanner scan = new Scanner(System.in);
 		int option = -1;
-
+		
 		System.out.println("Number of Pitchers: " + pitchers.size());        
 		while(option != 0){
 			option = getOption(scan, game);
@@ -85,11 +88,6 @@ public class PitchTrackerDriver{
 		RefineryUtilities.centerFrameOnScreen(chart);
 		chart.setVisible(true);
 		chart.setAlwaysOnTop(true);
-        CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
-        chart.pack();  //packs up everything into JFrame
-        RefineryUtilities.centerFrameOnScreen(chart);
-        chart.setVisible(true);
-        chart.setAlwaysOnTop(true);
 	}
 
 	
@@ -99,19 +97,14 @@ public class PitchTrackerDriver{
 		RefineryUtilities.centerFrameOnScreen(chart);
 		chart.setVisible(true);
 		chart.setAlwaysOnTop(true);
-        XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
-        chart.pack();
-        RefineryUtilities.centerFrameOnScreen(chart);
-        chart.setVisible(true);
-        chart.setAlwaysOnTop(true);
 	}
 
 
-	private static void readCSV(SortedList<Pitcher> pitchers, Game game)
+	private static void readCSV(SortedList<Pitcher> pitchers, Game game, String Path)
 	{
 		Scanner scanner;
 		try {
-			scanner = new Scanner(new File("PitchForm8DataSample.csv"));			
+			scanner = new Scanner(new File(Path));			
 			while (scanner.hasNextLine())
 			{
 				String[] d = scanner.nextLine().split(",");
@@ -176,11 +169,9 @@ public class PitchTrackerDriver{
 				game.addOuting(outing);
 				outing.calcAll();
 
-				
+				//scanner.close();
 
 			}//ends while
-
-			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
