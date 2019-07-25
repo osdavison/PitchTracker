@@ -16,11 +16,24 @@ public class PitchTrackerDriver{
 		Game game = new Game(Outings);  //Linked list of Game objects
 
 		Scanner scan = new Scanner(System.in);
-		System.out.print("Enter Full .csv file path:");
-		String input = scan.nextLine();
-		readCSV(pitchers, game, input);
-		//C:\Users\spyan\Documents\Grav.Hack\PitchTracker\PitchTracker\PitchTracker\PitchForm8DataSample.csv
+		boolean isFile = false;
+		while(!isFile)
+		{
+			System.out.print("Enter Full .csv file path:");
+			String input = scan.nextLine();
+			try 
+			{
+				isFile = readCSV(pitchers, game, input);
+			}
+			catch(Exception E)
+			{
+				System.out.println("Error: " + E.getMessage());
+				isFile = false;
+			}
+
+		}
 		
+		System.out.println("Reading File: \n ... \n ... \n");
 		Outing outing = Outings.get(0);
 		outing.calcAll();
 		int option = -1;
@@ -70,10 +83,10 @@ public class PitchTrackerDriver{
 		catch(Exception E)
 		{
 			if(I.equals("Where is Dan?"))
-				input = 5;
+				input = 4;
 			else
 			{
-			input = 4;
+			input = 5;
 			System.out.println("Error: No Command " + E.getMessage());				
 			}
 
@@ -100,7 +113,7 @@ public class PitchTrackerDriver{
 	}
 
 
-	private static void readCSV(SortedList<Pitcher> pitchers, Game game, String Path)
+	private static boolean readCSV(SortedList<Pitcher> pitchers, Game game, String Path)
 	{
 		Scanner scanner;
 		try {
@@ -173,10 +186,11 @@ public class PitchTrackerDriver{
 
 			}//ends while
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Error: " + e.getMessage());
+			return false;
 		}
 
-		
+		return true;
 	}//ends readcsv
 
 }//ends class
