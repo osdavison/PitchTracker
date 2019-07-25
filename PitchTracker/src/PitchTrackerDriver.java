@@ -60,6 +60,7 @@ public class PitchTrackerDriver{
 			}
 		}
 
+		System.exit(0);
 		
 	}//ends main
 

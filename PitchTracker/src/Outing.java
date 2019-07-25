@@ -84,6 +84,8 @@ public class Outing implements Serializable{
    
    public int getPitchCount(){   return this.pitches.size();   }
    
+   
+   //returns array of percents each pitch was thrown
    public double[] getPercentages(){
       calcAll();
       double[] array = new double[6];
