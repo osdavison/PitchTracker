@@ -27,7 +27,6 @@ public class CreateChart extends JFrame{
 	   
 	   private PieDataset createDataset(){
 	      DefaultPieDataset result = new DefaultPieDataset();
-	      System.out.println("First position: " + percentages[0]);
 	      result.setValue("Fastball", percentages[0]);    //values do not need to add up to 100
 	      result.setValue("Curveball", percentages[1]);
 	      result.setValue("Slider", percentages[2]);
