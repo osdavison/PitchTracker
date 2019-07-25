@@ -14,21 +14,25 @@ public class PitchTrackerDriver{
 		SortedList<Pitcher> pitchers = new SortedList<>();  //Linked list of Pitcher objects
 		LList<Outing> Outings = new LList<>();
 		Game game = new Game(Outings);  //Linked list of Game objects
-		
-		readCSV(pitchers, game);
-		Outing outing = Outings.get(0);
-		outing.calcAll();
 
 		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter Full .csv file path:");
+		String input = scan.nextLine();
+		readCSV(pitchers, game, input);
+		//C:\Users\spyan\Documents\Grav.Hack\PitchTracker\PitchTracker\PitchTracker\PitchForm8DataSample.csv
+		
+		Outing outing = Outings.get(0);
+		outing.calcAll();
 		int option = -1;
-
+		
 		System.out.println("Number of Pitchers: " + pitchers.size());        
 		while(option != 0){
 			option = getOption(scan, game);
 			switch(option){
 			case 0:
+				System.out.println("Goodbye!");
 				break;   //Quits
-			case 1:  
+			case 1: 
 				showTypeChart(game);
 				break;
 			case 2:
@@ -38,17 +42,17 @@ public class PitchTrackerDriver{
 				game.outings.get(0).printPitches();
 				break;
 			case 4:
-				break;
-			case 5:
 				System.out.println("Not in the Office");
 				break;
 			}
 		}
+
 		System.exit(0);
 		
 	}//ends main
 
 	//-----------------------------------------------------------------------------
+
 	
 	private static int getOption(Scanner scan, Game game) {
 		int input = 0;
@@ -78,29 +82,30 @@ public class PitchTrackerDriver{
 		
 		return input;
 	}
-	
+
 	private static void showTypeChart(Game game) {
-        CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
-        chart.pack();  //packs up everything into JFrame
-        RefineryUtilities.centerFrameOnScreen(chart);
-        chart.setVisible(true);
-        chart.setAlwaysOnTop(true);
+		CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
+		chart.pack();  //packs up everything into JFrame
+		RefineryUtilities.centerFrameOnScreen(chart);
+		chart.setVisible(true);
+		chart.setAlwaysOnTop(true);
 	}
+
 	
 	private static void showVelocityChart(Game game) {
-        XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
-        chart.pack();
-        RefineryUtilities.centerFrameOnScreen(chart);
-        chart.setVisible(true);
-        chart.setAlwaysOnTop(true);
+		XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
+		chart.pack();
+		RefineryUtilities.centerFrameOnScreen(chart);
+		chart.setVisible(true);
+		chart.setAlwaysOnTop(true);
 	}
 
 
-	private static void readCSV(SortedList<Pitcher> pitchers, Game game)
+	private static void readCSV(SortedList<Pitcher> pitchers, Game game, String Path)
 	{
 		Scanner scanner;
 		try {
-			scanner = new Scanner(new File("PitchForm8DataSample.csv"));			
+			scanner = new Scanner(new File(Path));			
 			while (scanner.hasNextLine())
 			{
 				String[] d = scanner.nextLine().split(",");
@@ -117,6 +122,11 @@ public class PitchTrackerDriver{
 						i = i - 2;
 						continue;
 					}
+
+					
+					if(d[i].equals("BLANK")) {
+						continue;
+					}
 					
 					Pitch pitch = new Pitch();
 					//result,type,speed
@@ -128,6 +138,7 @@ public class PitchTrackerDriver{
 					{
 						pitch.setStrike(1);
 					}
+
 					
 					switch(d[i + 1])
 					{
@@ -153,18 +164,19 @@ public class PitchTrackerDriver{
 
 					pitch.setVelo(Integer.parseInt(d[i + 2]));
 					outing.addPitch(pitch);
+
 					
 				}//ends for
 				game.addOuting(outing);
 				outing.calcAll();
-				
+
+				//scanner.close();
 
 			}//ends while
-
-			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
 		
 	}//ends readcsv
 
