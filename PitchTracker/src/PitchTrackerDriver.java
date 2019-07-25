@@ -19,7 +19,9 @@ public class PitchTrackerDriver{
 		System.out.print("Enter Full .csv file path:");
 		String input = scan.nextLine();
 		readCSV(pitchers, game, input);
-		//C:\Users\spyan\Documents\Grav.Hack\PitchTracker\PitchTracker\PitchTracker\PitchForm8DataSample.csv
+		//	C:\Users\spyan\Documents\Grav.Hack\PitchTracker\PitchTracker\PitchTracker\PitchForm8DataSample.csv
+		//	C:\Users\Dylan\Desktop\4PageData.csv
+		//	/Users/Seth/Downloads/4PageData.csv
 		
 		Outing outing = Outings.get(0);
 		outing.calcAll();
