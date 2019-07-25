@@ -14,7 +14,7 @@ public class PitchTrackerDriver{
 		SortedList<Pitcher> pitchers = new SortedList<>();  //Linked list of Pitcher objects
 		LList<Outing> Outings = new LList<>();
 		Game game = new Game(Outings);  //Linked list of Game objects
-		
+
 		readCSV(pitchers, game);
 		Outing outing = Outings.get(0);
 		outing.calcAll();
@@ -27,8 +27,9 @@ public class PitchTrackerDriver{
 			option = getOption(scan, game);
 			switch(option){
 			case 0:
+				System.out.println("Goodbye!");
 				break;   //Quits
-			case 1:  
+			case 1: 
 				showTypeChart(game);
 				break;
 			case 2:
@@ -38,16 +39,16 @@ public class PitchTrackerDriver{
 				game.outings.get(0).printPitches();
 				break;
 			case 4:
-				break;
-			case 5:
 				System.out.println("Not in the Office");
 				break;
 			}
 		}
+
 		
 	}//ends main
 
 	//-----------------------------------------------------------------------------
+
 	
 	private static int getOption(Scanner scan, Game game) {
 		int input = 0;
@@ -77,16 +78,27 @@ public class PitchTrackerDriver{
 		
 		return input;
 	}
-	
+
 	private static void showTypeChart(Game game) {
+		CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
+		chart.pack();  //packs up everything into JFrame
+		RefineryUtilities.centerFrameOnScreen(chart);
+		chart.setVisible(true);
+		chart.setAlwaysOnTop(true);
         CreateChart chart = new CreateChart("Chart", "Pitch percentages", game.outings.get(0).getPercentages());
         chart.pack();  //packs up everything into JFrame
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
         chart.setAlwaysOnTop(true);
 	}
+
 	
 	private static void showVelocityChart(Game game) {
+		XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
+		chart.pack();
+		RefineryUtilities.centerFrameOnScreen(chart);
+		chart.setVisible(true);
+		chart.setAlwaysOnTop(true);
         XYLineChart chart = new XYLineChart("Pitch Graph", "Pitch type velocity graph", game.outings.get(0).getPitchList());
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
@@ -116,6 +128,7 @@ public class PitchTrackerDriver{
 						i = i - 2;
 						continue;
 					}
+
 					
 					if(d[i].equals("BLANK")) {
 						continue;
@@ -131,6 +144,7 @@ public class PitchTrackerDriver{
 					{
 						pitch.setStrike(1);
 					}
+
 					
 					switch(d[i + 1])
 					{
@@ -156,10 +170,12 @@ public class PitchTrackerDriver{
 
 					pitch.setVelo(Integer.parseInt(d[i + 2]));
 					outing.addPitch(pitch);
+
 					
 				}//ends for
 				game.addOuting(outing);
 				outing.calcAll();
+
 				
 
 			}//ends while
@@ -168,6 +184,7 @@ public class PitchTrackerDriver{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
 		
 	}//ends readcsv
 
